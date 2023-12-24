@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GuessGame</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+
+        font-family: Microsoft JhengHei,Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        
+        background-image: 
+                  linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 0, 0.5));
+        background-size: cover;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .btnGroup {
+        margin: 10px;
+      }
+      .btnGroup {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        background-color: rgb(192, 255, 217);
+        border-radius: 50%;
+      }
+
+      .btnGroup:hover {
+        background-color: rgb(0, 128, 102);
+        border-radius: 50%;
+        color: aliceblue;
+      }
+
+
+      input {
+        padding: 8px;
+        font-size: 16px;
+        margin-right: 8px;
+        text-align: center;
+      }
+
+      #result {
+        font-size: 18px;
+        margin-top: 10px;
+      }
+
+      #feedback {
+        margin-top: 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <h1>猜數字遊戲-練習版</h1>
+      <div>
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="1" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="2" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="3" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="4" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="5" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="6" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="7" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="8" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="9" />
+        <input type="button" onclick="myFunction(this.value)" class="btnGroup" value="0" />
+      </div>
+
+      <input type="text" id="guess-input" readonly value="" />
+      <input type="button" value="確認" onclick="confirm1()"/>
+      <input type="button" value="清除" onclick="clear1()"/>
+      <p id="result">Fighting</p>
+      <p class="highlight" id = "show">請輸入1~100之間的數字</p>
+      
+    </div>
+
+    <script>
+
+      function clear1(){
+        document.getElementById("guess-input").value ="";
+      }
+
+      let x = 1;
+      let max = 100;
+      let min = 1;
+      let num = 0;
+      
+      window.onload = function(){
+        x = parseInt(Math.random() * 100);
+        //alert(x);
+      }
+      function myFunction(num2){
+        let num1 =  document.getElementById("guess-input").value;
+        num = num1 + num2;        
+        document.getElementById("guess-input").value = num;
+      }
+
+      function confirm1(){
+        if (num <= max & num >= min) {
+          document.getElementById("guess-input").value = num;
+
+          if(num > x)
+          {
+            max = num;
+            document.getElementById("show").innerHTML =`請輸入${min}~${max}之間的數字`;
+          }
+          else if(num < x){
+            min = num;
+            document.getElementById("show").innerHTML =`請輸入${min}~${max}之間的數字`;
+          }
+          else{
+            alert(`恭喜你答對了~~數字是${x}`);
+          }
+          clear1();
+          
+        }
+        else{
+          alert("請確認輸入範圍!!!");
+        }
+      }
+      
+
+    </script>
+  </body>
+</html>
